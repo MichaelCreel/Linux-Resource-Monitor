@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <limits.h>
+#include <string.h>
 
 int main() {
     //USER AND PROCESS INFORMATION
