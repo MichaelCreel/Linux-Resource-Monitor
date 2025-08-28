@@ -27,10 +27,13 @@ int main() {
     FILE *mem = fopen("/proc/meminfo", "r");
     if (mem) {
         printf("\n<--- MEMORY INFORMATION --->\n");
-        char line[256];
-        while (fgets(line, sizeof(line), mem)) {
-            if (strncmp(line, "MemTotal", 8) == 0 || strncmp(line, "MemFree", 7) == 0) {
-                printf("%s", line);
+        char label[64];
+        unsigned long mem_kb = 0;
+        while (fscanf(mem, "%63s %lu kb\n", label, &mem_kb) == 2) {
+            if (strcmp(label, "MemTotal:") ==0) {
+                printf("Total Memory: %.2f GB\n", mem_kb / 1024.0 / 1024.0);
+            } else if (strcmp(label, "MemFree:") == 0) {
+                printf("Free Memory: %.2f GB\n", mem_kb / 1024.0 / 1024.0);
             }
         }
         fclose(mem);
