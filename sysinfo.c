@@ -11,17 +11,25 @@ int main() {
     printf("Process ID: %d\n", getpid());
 
     //CPU INFORMATION
-    FILE *cpu = fopen("/proc/cpuinfo", "r");
-    if (cpu) {
-        printf("\n<--- CPU INFORMATION --->\n");
-        char line[256];
-        while (fgets(line, sizeof(line), cpu)) {
-            if (strncmp(line, "model name", 10) == 0 || strncmp(line, "cpu cores", 9) == 0) {
-                printf("%s", line);
-            }
-        }
-        fclose(cpu);
-    }
+    unsigned long long user1, nice1, system1, idle1;
+    unsigned long long user2, nice2, system2, idle2;
+
+    FILE *fp = fopen("/proc/stat", "r");
+    fscanf(fp, "cpu %llu %llu %llu %llu", &user1, &nice1, &system1, &idle1);
+    fclose(fp);
+    usleep(100000); // 100ms sleep
+
+    fp = fopen("/proc/stat", "r");
+    fscanf(fp, "cpu %llu %llu %llu %llu", &user2, &nice2, &system2, &idle2);
+    fclose(fp);
+
+    unsigned long long total1 = user1 + nice1 + system1 + idle1;
+    unsigned long long total2 = user2 + nice2 + system2 + idle2;
+    unsigned long long total_diff = total2 - total1;
+    unsigned long long idle_diff = idle2 - idle1;
+    float cpu_usage = 100.0 * (total_diff - idle_diff) / total_diff;
+    printf("\n<--- CPU INFORMATION --->\n");
+    printf("CPU Usage: %.2f%%\n", cpu_usage);
 
     //MEMORY INFORMATION
     FILE *mem = fopen("/proc/meminfo", "r");
