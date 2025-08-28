@@ -27,16 +27,32 @@ int main() {
     FILE *mem = fopen("/proc/meminfo", "r");
     if (mem) {
         printf("\n<--- MEMORY INFORMATION --->\n");
+
+        unsigned long mem_total = 0;
+        unsigned long mem_free = 0;
         char label[64];
-        unsigned long mem_kb = 0;
-        while (fscanf(mem, "%63s %lu kb\n", label, &mem_kb) == 2) {
-            if (strcmp(label, "MemTotal:") ==0) {
-                printf("Total Memory: %.2f GB\n", mem_kb / 1024.0 / 1024.0);
-            } else if (strcmp(label, "MemFree:") == 0) {
-                printf("Free Memory: %.2f GB\n", mem_kb / 1024.0 / 1024.0);
+        unsigned long value;
+
+        while (fscanf(mem, "%63s %lu kB\n", label, &value) == 2) {
+            if (strcmp(label, "MemTotal:") == 0) {
+                mem_total = value;
+            } else if (strcmp(label, "MemAvailable:") == 0) {
+                mem_free = value;
+            }
+            if (mem_total && mem_free) {
+                break;
             }
         }
         fclose(mem);
+
+        float mem_total_gb = mem_total / 1024.0 / 1024.0;
+        float mem_free_gb = mem_free / 1024.0 / 1024;
+        float mem_used_gb = mem_total_gb - mem_free_gb;
+        float mem_used_percent = (mem_used_gb / mem_total_gb) * 100.0;
+
+        printf("Used Memory: %.2f%% (%.2f GB)\n\n", mem_used_percent, mem_used_gb);
+        printf("Free Memory: %.2f GB (%.2f%%)\n", mem_free_gb, 100.0 - mem_used_percent);
+        printf("Total Memory: %.2f GB\n", mem_total_gb);
     }
 
     return 0;
