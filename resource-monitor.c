@@ -5,11 +5,6 @@
 #include <string.h>
 
 int main() {
-    //USER AND PROCESS INFORMATION
-    printf("User ID: %d\n", getuid());
-    printf("Group ID: %d\n", getgid());
-    printf("Process ID: %d\n", getpid());
-
     //CPU INFORMATION
     printf("\n<--- CPU INFORMATION --->\n");
     unsigned long long user1, nice1, system1, idle1;
@@ -102,6 +97,7 @@ int main() {
     } else {
         printf("No GPU Detected\n");
     }
-
+    printf("\n");
+    
     return 0;
 }
