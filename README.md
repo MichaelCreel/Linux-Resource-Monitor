@@ -24,6 +24,8 @@ A terminal-based Resource Monitor designed for Linux systems. Displays the avera
 4. Build the app
    ```bash
    make
+   ```
+   Some warnings will print out, but the app will still build
 5. (Optional) Install system-wide
    ```bash
    sudo cp resource-monitor /usr/local/bin/
