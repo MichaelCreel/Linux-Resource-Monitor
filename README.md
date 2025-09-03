@@ -8,9 +8,9 @@ A terminal-based Resource Monitor designed for Linux systems. Displays the avera
   ```bash
   sudo apt install build-essential
 - GPU:
-  - nvidia-smi (for nvidia cards)
-  - amdgpu_top (for amd cards)
-  - intel_gpu_top (for intel cars)
+  - nvidia-smi (for NVIDIA cards)
+  - amdgpu_top (for AMD cards)
+  - intel_gpu_top (for Intel cards)
 
 ## Installation
 
@@ -42,12 +42,12 @@ cd ~/Linux-Resource-Monitor/
 ./resource-monitor
 ```
 
-# Notes
+## Notes
 
 - If GPU tools are not found, your GPU usage will remain undetected
 - Designed for Debian
 - Root access required for intel_gpu_top
 
-# License
+## License
 
 MIT License
