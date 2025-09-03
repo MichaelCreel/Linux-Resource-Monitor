@@ -4,9 +4,6 @@ A terminal-based Resource Monitor designed for Linux systems. Displays the avera
 
 ## Dependencies
 
-- gcc and make
-  ```bash
-  sudo apt install build-essential
 - GPU:
   - nvidia-smi (for NVIDIA cards)
   - amdgpu_top (for AMD cards)
@@ -21,26 +18,21 @@ A terminal-based Resource Monitor designed for Linux systems. Displays the avera
 3. Open app directory
    ```bash
    cd Linux-Resource-Monitor
-4. Build the app
-   ```bash
-   make
-   ```
-   Some warnings will print out, but the app will still build
-5. (Optional) Install system-wide
+4. (Optional) Install system-wide
    ```bash
    sudo cp resource-monitor /usr/local/bin/
-6. Run app in terminal
+5. Run app in terminal
 
   - System-wide:
    ```bash
    resource-monitor
-```
+  ```
 
   - Not System-wide:
   ```bash
-cd ~/Linux-Resource-Monitor/
-./resource-monitor
-```
+  cd ~/Linux-Resource-Monitor/
+  ./resource-monitor
+  ```
 
 ## Notes
 
