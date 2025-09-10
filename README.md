@@ -24,15 +24,15 @@ A terminal-based Resource Monitor designed for Linux systems. Displays the avera
 5. Run app in terminal
 
   - System-wide:
-   ```bash
-   resource-monitor
-  ```
+    ```bash
+    resource-monitor
+    ```
 
   - Not System-wide:
-  ```bash
-  cd ~/Linux-Resource-Monitor/
-  ./resource-monitor
-  ```
+    ```bash
+    cd ~/Linux-Resource-Monitor/
+    ./resource-monitor
+    ```
 
 ## Notes
 
